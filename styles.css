@@ -1,0 +1,13 @@
+@import url(styles/principal.css);
+@import url(styles/carrossel.css);
+@import url(styles/cabeçalho.css);
+@import url(styles/form_contato.css);
+@import url(style/footer.css);
+body{
+font-family: Arial, Helvetica, sans-serif;
+display: block;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}

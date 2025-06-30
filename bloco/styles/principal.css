@@ -1,0 +1,26 @@
+.convite{
+    background: linear-gradient(rgba(150, 149, 27, 0.5),rgba(255, 255, 35, 0.5));
+    text-align: left;
+    width: 63%;
+    height: auto;
+    font-size:25px;
+    padding: 20px;
+    border: solid 2px  rgba(150, 149, 27, 0.5);
+    border-radius: 15px;
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.convite:hover{
+    transform: translateY(-8px) scale(1.02);
+}
+
+.subtitulo-convite, textarea{
+    font-size: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 30px;
+    border: solid 2px #ffffff;
+    border-radius: 15px;
+    box-sizing: border-box;/*para o padding não aumentar o tamanho do input*/
+}

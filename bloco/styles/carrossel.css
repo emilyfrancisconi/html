@@ -1,0 +1,49 @@
+.carousel-inner img{
+    width:100%;
+    height:auto;
+    max-height:600px;
+    object-fit: cover;
+    border: solid rgb(150, 150, 27);
+    border-radius: 15px;
+}
+
+.carousel{
+    max-width:800px;
+    margin:auto;
+}
+
+.carousel-caption{
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+}
+
+.spacer{
+    margin-top: 30px;
+}
+
+.titulo{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.contato{
+    padding: 20px;
+}
+
+.carousel-control-prev-icon, 
+            .carousel-control-next-icon{
+                background-color: black;
+                border-radius: 50%;
+                padding: 10px;
+            }
+            .carousel-control-prev,
+            .carousel-control-next{
+                width: 10%;
+                color: white;
+            }
+            .carousel-control-prev{
+                left: -5%;
+            }
+            .carousel-control-next{
+                right: -5%;
+            }

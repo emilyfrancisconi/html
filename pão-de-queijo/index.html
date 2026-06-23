@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pão de Queijo Mineiro</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Pão de Queijo Mineiro</h1>
+
+    <nav>
+        <a href="#produtos">Produtos</a>
+
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>O melhor pão de queijo da região!</h2>
+    <p>pão de queijo artesanal com muito queijo e sabor.</p>
+
+    <button onclick="document.getElementById('produtos').scrollIntoView()">
+        Comprar Agora
+    </button>
+
+    <a class="botao-proxima" href="proxima.html">
+        carrinho
+    </a>
+</section>
+
+
+<section id="produtos">
+
+    <h2>Nossos Produtos</h2>
+
+    <div class="produtos-container">
+
+        <div class="produto">
+            <img src="imagens/historia-do-pao-de-queijo-1.webp"
+            <h3>Pão de Queijo Tradicional</h3>
+            <p>Pacote com 10 unidades</p>
+            <span>R$ 20,00</span>
+            
+
+            <button onclick="adicionarCarrinho('Pão de Queijo Tradicional',20)">
+                Adicionar ao Carrinho
+            </button>
+        </div>
+
+        <div class="produto">
+            <img src="imagens/172382837066bf889213154_1723828370_3x2_md.jpg"
+            <h3>Pão de Queijo com Recheado doce</h3>
+            <p>Pacote com 15 unidades </p>
+            <span>R$ 35,00</span>
+
+            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado doce',35)">
+                Adicionar ao Carrinho
+            </button>
+        </div>
+
+        <div class="produto">
+            <img src="imagens/49f2c0f864a4bdf454c201bccf66707e147c2c4a.webp"
+            <h3>Pão de Queijo com recheio de salame
+            <p>Pacote com 10 nidades</p>
+            <span>R$ 37,00</span>
+
+            
+            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado de salame',37)">
+                Adicionar ao Carrinho
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+<section id="sobre">
+    <h2>Sobre Nós</h2>
+
+    <p>
+        Produzimos pão de queijo artesanal seguindo receitas
+        tradicionais mineiras há mais de 10 anos.
+    </p>
+</section>
+
+<hr class="divisao">
+
+<section id="contato">
+    <h2>Contato</h2>
+
+
+    <p>WhatsApp: (41) 99999-9999</p>
+    <p>Email: contato@paodequeijo.com</p>
+</section>
+
+<footer>
+    <p>
+        © 2026 Pão de Queijo Mineiro
+    </p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

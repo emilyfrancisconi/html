@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Próxima pagina - Pão de Queijo</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Pão de Queijo Mineiro</h1>
+
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="index.html#contato">Contato</a>
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>seu carrinho</h2>
+    <p>Veja e finalize seus itens no carrinho.</p>
+</section>
+
+<section id="carrinho">
+
+    <h2>🛒 Carrinho de Compras</h2>
+
+    <ul id="lista-carrinho"></ul>
+
+    <h3>
+        Total: R$
+        <span id="total">0.00</span>
+    </h3>
+
+    <div class="botoes-carrinho">
+        <button class="limpar" onclick="limparCarrinho()">
+            Limpar Carrinho
+        </button>
+
+        <button class="whatsapp" onclick="enviarWhatsApp()">
+            Finalizar Pedido
+        </button>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Pão de Queijo Mineiro</p>
+</footer>
+
+<script>
+    // Mantém a lógica do carrinho (igual ao index), usando localStorage
+    let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+
+    function salvarCarrinho(){
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    }
+
+    function adicionarCarrinho(nome, preco){
+        const itemExistente = carrinho.find(item => item.nome === nome);
+
+        if(itemExistente){
+            itemExistente.quantidade++;
+        }else{
+            carrinho.push({ nome, preco, quantidade: 1 });
+        }
+
+        salvarCarrinho();
+        atualizarCarrinho();
+    }
+
+    function removerItem(nome){
+        carrinho = carrinho.filter(item => item.nome !== nome);
+        salvarCarrinho();
+        atualizarCarrinho();
+    }
+
+    function limparCarrinho(){
+        carrinho = [];
+        salvarCarrinho();
+        atualizarCarrinho();
+    }
+
+    function atualizarCarrinho(){
+        const lista = document.getElementById('lista-carrinho');
+        const total = document.getElementById('total');
+
+        lista.innerHTML = "";
+        let valorTotal = 0;
+
+        carrinho.forEach(item => {
+            valorTotal += item.preco * item.quantidade;
+
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span>
+                    ${item.nome}
+                    (${item.quantidade}x)
+                    - R$ ${(item.preco * item.quantidade).toFixed(2)}
+                </span>
+
+                <button class="remover" onclick="removerItem('${item.nome}')">X</button>
+            `;
+
+            lista.appendChild(li);
+        });
+
+        total.textContent = valorTotal.toFixed(2);
+    }
+
+    function enviarWhatsApp(){
+        if(carrinho.length === 0){
+            alert("Seu carrinho está vazio!");
+            return;
+        }
+
+        let mensagem = "Olá! Gostaria de fazer o seguinte pedido:%0A%0A";
+        let total = 0;
+
+        carrinho.forEach(item => {
+            mensagem += `${item.nome} - ${item.quantidade}x - R$ ${(item.preco * item.quantidade).toFixed(2)}%0A`;
+            total += item.preco * item.quantidade;
+        });
+
+        mensagem += `%0A*Total:* R$ ${total.toFixed(2)}`;
+        const telefone = "5541999999999";
+
+        window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
+    }
+
+    // Render inicial
+    document.addEventListener('DOMContentLoaded', atualizarCarrinho);
+</script>
+
+</body>
+</html>
+

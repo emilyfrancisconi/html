@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerenciar Estoque - Pão de Queijo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <h1>Pão de Queijo Mineiro</h1>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="proxima.html">Carrinho</a>
+  </nav>
+</header>
+
+<section class="banner">
+  <h2>Gerenciar Estoque</h2>
+  <p>Atualize quantidades disponíveis. O carrinho respeitará estes valores.</p>
+</section>
+
+<section id="estoque" style="padding:50px 20px; text-align:center; max-width:1100px; margin:0 auto;">
+  <h2>Produtos</h2>
+
+  <div class="produtos-container" style="margin-top:20px;">
+
+    <div class="produto" style="width:320px;">
+      <h3>Pão de Queijo Tradicional</h3>
+      <p>Preço: <strong>R$ 20,00</strong></p>
+      <p class="estoque">Disponível: <strong id="qtd-Tradicional">0</strong></p>
+      <div style="display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap;">
+        <input id="input-Tradicional" type="number" min="0" value="0" style="width:90px; padding:8px; border-radius:5px; border:1px solid #e5e7eb;" />
+        <button class="limpar" type="button" onclick="setar('Tradicional')">Salvar</button>
+      </div>
+
+    </div>
+
+    <div class="produto" style="width:320px;">
+      <h3>Pão de Queijo com Recheado doce</h3>
+      <p>Preço: <strong>R$ 35,00</strong></p>
+      <p class="estoque">Disponível: <strong id="qtd-Doce">0</strong></p>
+      <div style="display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap;">
+        <input id="input-Doce" type="number" min="0" value="0" style="width:90px; padding:8px; border-radius:5px; border:1px solid #e5e7eb;" />
+        <button class="whatsapp" type="button" onclick="setar('Doce')">Salvar</button>
+      </div>
+
+    </div>
+
+    <div class="produto" style="width:320px;">
+      <h3>Pão de Queijo com Recheado de salame</h3>
+      <p>Preço: <strong>R$ 37,00</strong></p>
+      <p class="estoque">Disponível: <strong id="qtd-Salame">0</strong></p>
+      <div style="display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap;">
+        <input id="input-Salame" type="number" min="0" value="0" style="width:90px; padding:8px; border-radius:5px; border:1px solid #e5e7eb;" />
+        <button class="whatsapp" type="button" onclick="setar('Salame')">Salvar</button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Estoques são salvos no localStorage para que index/proxima respeitem.
+  const ESTOQUE_DEFAULT = {
+    Tradicional: 20,
+    Doce: 30,
+    Salame: 30
+  };
+
+  const MAP_PRODUTO = {
+    Tradicional: "Pão de Queijo Tradicional",
+    Doce: "Pão de Queijo com Recheado doce",
+    Salame: "Pão de Queijo com Recheado de salame"
+  };
+
+  function carregar(){
+    const raw = localStorage.getItem('estoque')
+    if(!raw){
+      localStorage.setItem('estoque', JSON.stringify(ESTOQUE_DEFAULT));
+      return { ...ESTOQUE_DEFAULT };
+    }
+    try{
+      const obj = JSON.parse(raw);
+      return { ...ESTOQUE_DEFAULT, ...obj };
+    }catch(e){
+      localStorage.setItem('estoque', JSON.stringify(ESTOQUE_DEFAULT));
+      return { ...ESTOQUE_DEFAULT };
+    }
+  }
+
+  function salvar(obj){
+    localStorage.setItem('estoque', JSON.stringify(obj));
+  }
+
+  function atualizarUI(estoque){
+    for(const k of Object.keys(ESTOQUE_DEFAULT)){
+      const qtd = document.getElementById('qtd-' + k);
+      const input = document.getElementById('input-' + k);
+      if(qtd) qtd.textContent = estoque[k] ?? 0;
+      if(input) input.value = estoque[k] ?? 0;
+    }
+  }
+
+
+
+  function setar(chave){
+    const estoque = carregar();
+    const input = document.getElementById('input-' + chave);
+    const val = Number(input ? input.value : 0);
+    estoque[chave] = Number.isFinite(val) && val >= 0 ? val : 0;
+    salvar(estoque);
+    atualizarUI(estoque);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const estoque = carregar();
+    atualizarUI(estoque);
+  });
+</script>
+
+</body>
+</html>
+

@@ -1,18 +1,50 @@
 let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
 
-const ESTOQUE_MAX_POR_NOME = {
-    "Pão de Queijo Tradicional": 20,
-    "Pão de Queijo com Recheado doce": 30,
-    "Pão de Queijo com Recheado de salame": 30,
+const ESTOQUE_DEFAULT = {
+    Tradicional: 20,
+    Doce: 30,
+    Salame: 30,
 };
+
+// Lê do localStorage (gerenciado pela página estoque.html)
+function carregarEstoque(){
+    const raw = localStorage.getItem('estoque');
+    if(!raw){
+        localStorage.setItem('estoque', JSON.stringify(ESTOQUE_DEFAULT));
+        return { ...ESTOQUE_DEFAULT };
+    }
+    try{
+        const obj = JSON.parse(raw);
+        return { ...ESTOQUE_DEFAULT, ...obj };
+    }catch(e){
+        localStorage.setItem('estoque', JSON.stringify(ESTOQUE_DEFAULT));
+        return { ...ESTOQUE_DEFAULT };
+    }
+}
+
+// Mapa nome do produto -> chave no estoque
+function chaveEstoquePorNomeProduto(nome){
+    const map = {
+        'Pão de Queijo Tradicional': 'Tradicional',
+        'Pão de Queijo com Recheado doce': 'Doce',
+        'Pão de Queijo com Recheado de salame': 'Salame'
+    };
+    return map[nome];
+}
+
 
 function salvarCarrinho(){
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
 }
 
 function adicionarCarrinho(nome, preco, estoqueMax){
-    // compatibilidade: se não vier estoqueMax, tenta pelo mapa
-    const limite = Number(estoqueMax ?? ESTOQUE_MAX_POR_NOME[nome] ?? 0);
+    // limite vem do estoque definido na página estoque.html (via localStorage)
+    // (estoqueMax é passado do index.html; se não vier, tenta carregar pelo mapa por nome)
+    const limite = Number(estoqueMax ?? (() => {
+        const chave = chaveEstoquePorNomeProduto(nome);
+        const estoque = carregarEstoque();
+        return estoque[chave] ?? 0;
+    })() );
     if(limite <= 0){
         alert('Produto sem estoque cadastrado no momento.');
         return;
@@ -56,9 +88,11 @@ function atualizarCarrinho(){
 
     if(!lista || !total) return;
 
-    // garante coerência mesmo se localStorage estiver “maior que estoque”
+    // garante coerência mesmo se o carrinho no localStorage estiver acima do estoque
     carrinho = carrinho.map(item => {
-        const limite = Number(ESTOQUE_MAX_POR_NOME[item.nome] ?? 0);
+        const chave = chaveEstoquePorNomeProduto(item.nome);
+        const estoque = carregarEstoque();
+        const limite = Number(estoque[chave] ?? 0);
         if(limite > 0 && item.quantidade > limite){
             return { ...item, quantidade: limite };
         }

@@ -31,6 +31,10 @@
     <a class="botao-proxima" href="proxima.html">
         carrinho
     </a>
+
+    <a class="botao-proxima" href="estoque.html">
+        estoque
+    </a>
 </section>
 
 
@@ -45,9 +49,10 @@
             <h3>Pão de Queijo Tradicional</h3>
             <p>Pacote com 10 unidades</p>
             <span>R$ 20,00</span>
-            <p class="estoque">Estoque: 20</p>
+            <p class="estoque">Estoque: <span id="estoque-Tradicional">20</span></p>
             
-            <button onclick="adicionarCarrinho('Pão de Queijo Tradicional',20,20)">
+            <button onclick="adicionarCarrinho('Pão de Queijo Tradicional',20,obterEstoquePorNome('Pão de Queijo Tradicional'))">
+
                 Adicionar ao Carrinho
             </button>
         </div>
@@ -58,9 +63,10 @@
             <h3>Pão de Queijo com Recheado doce</h3>
             <p>Pacote com 15 unidades </p>
             <span>R$ 35,00</span>
-            <p class="estoque">Estoque: 30</p>
+            <p class="estoque">Estoque: <span id="estoque-Doce">30</span></p>
 
-            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado doce',35,30)">
+            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado doce',35,obterEstoquePorNome('Pão de Queijo com Recheado doce'))">
+
                 Adicionar ao Carrinho
             </button>
         </div>
@@ -71,10 +77,11 @@
             <h3>Pão de Queijo com recheio de salame
             <p>Pacote com 10 nidades</p>
             <span>R$ 37,00</span>
-            <p class="estoque">Estoque: 30</p>
+            <p class="estoque">Estoque: <span id="estoque-Salame">30</span></p>
 
             
-            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado de salame',37,30)">
+            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado de salame',37,obterEstoquePorNome('Pão de Queijo com Recheado de salame'))">
+
                 Adicionar ao Carrinho
             </button>
 
@@ -114,6 +121,37 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script>
+    // Atualiza estoques na página e provê função para usar no inline onclick
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof carregarEstoque === 'function') {
+            const estoque = carregarEstoque();
+            const ids = {
+                Tradicional: 'estoque-Tradicional',
+                Doce: 'estoque-Doce',
+                Salame: 'estoque-Salame'
+            };
+            Object.entries(ids).forEach(([k, id]) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = estoque[k] ?? 0;
+            });
+        }
+    });
+
+    function obterEstoquePorNome(nome){
+        // nomes precisam bater com o MAP do estoque (estoque.html)
+        const map = {
+            'Pão de Queijo Tradicional': 'Tradicional',
+            'Pão de Queijo com Recheado doce': 'Doce',
+            'Pão de Queijo com Recheado de salame': 'Salame',
+        };
+        const chave = map[nome];
+        if(!chave || typeof carregarEstoque !== 'function') return 0;
+        const estoque = carregarEstoque();
+        return estoque[chave] ?? 0;
+    }
+</script>
 
 </body>
 </html>

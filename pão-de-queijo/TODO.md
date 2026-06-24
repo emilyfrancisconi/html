@@ -1,10 +1,8 @@
-# TODO - Estoque no código
+# TODO
 
-- [x] Atualizar `index.html` para exibir estoque e passar valores ao `adicionarCarrinho`
-- [x] Atualizar `script.js` para validar estoque ao adicionar/remover itens e persistir carrinho no `localStorage`
-- [x] Atualizar `proxima.html` para aplicar a mesma validação/limites e manter exibição coerente
-- [ ] Atualizar `style.css` (opcional) para estilizar o texto de estoque
-- [ ] Finalizar pedido deve abrir nova página de pagamento (pix/débito/crédito)
-- [x] Criar página `estoque.html` e botão para acessar
-- [x] Testar: adicionar até o limite, impedir exceder, abrir carrinho e verificar limites
+- [x] Definir como aplicar imagem de fundo no `header` (via `background-image` + overlay para legibilidade).
+- [x] Atualizar `style.css` para que o `header` use `background-image` da pasta `imagens/`.
+- [x] Garantir contraste: adicionar overlay/blur ou ajustar `text-shadow`.
+- [ ] Testar nas páginas `index.html`, `estoque.html`, `pagamento.html` e `proxima.html`.
+
 

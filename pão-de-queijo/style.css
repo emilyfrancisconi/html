@@ -10,14 +10,36 @@ body{
 }
 
 header{
-    background:#d97706;
-    color:white;
-    padding:20px;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    padding:30px;
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
+    background: #d97706;
 }
+
+
+/* Fundo por imagem com overlay para manter o texto legível */
+header::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("imagens/51bda96f9a9dd5a029b49742f84da6e3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.35;
+    z-index: 0;
+}
+
+header > *{
+    position: relative;
+    z-index: 1;
+}
+
 
 header nav{
     display:flex;

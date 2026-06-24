@@ -39,7 +39,7 @@
             Limpar Carrinho
         </button>
 
-        <button class="whatsapp" onclick="enviarWhatsApp()">
+        <button class="whatsapp" onclick="abrirPagamento()">
             Finalizar Pedido
         </button>
     </div>
@@ -58,10 +58,26 @@
         localStorage.setItem('carrinho', JSON.stringify(carrinho));
     }
 
-    function adicionarCarrinho(nome, preco){
+    const ESTOQUE_MAX_POR_NOME = {
+        "Pão de Queijo Tradicional": 20,
+        "Pão de Queijo com Recheado doce": 30,
+        "Pão de Queijo com Recheado de salame": 30,
+    };
+
+    function adicionarCarrinho(nome, preco, estoqueMax){
+        const limite = Number(estoqueMax ?? ESTOQUE_MAX_POR_NOME[nome] ?? 0);
+        if(limite <= 0){
+            alert('Produto sem estoque cadastrado no momento.');
+            return;
+        }
+
         const itemExistente = carrinho.find(item => item.nome === nome);
 
         if(itemExistente){
+            if(itemExistente.quantidade >= limite){
+                alert(`Estoque insuficiente para ${nome}. Limite: ${limite}.`);
+                return;
+            }
             itemExistente.quantidade++;
         }else{
             carrinho.push({ nome, preco, quantidade: 1 });
@@ -70,6 +86,7 @@
         salvarCarrinho();
         atualizarCarrinho();
     }
+
 
     function removerItem(nome){
         carrinho = carrinho.filter(item => item.nome !== nome);
@@ -86,6 +103,19 @@
     function atualizarCarrinho(){
         const lista = document.getElementById('lista-carrinho');
         const total = document.getElementById('total');
+
+        if(!lista || !total) return;
+
+        // garante coerência mesmo se localStorage estiver acima do estoque
+        carrinho = carrinho.map(item => {
+            const limite = Number(ESTOQUE_MAX_POR_NOME[item.nome] ?? 0);
+            if(limite > 0 && item.quantidade > limite){
+                return { ...item, quantidade: limite };
+            }
+            return item;
+        }).filter(item => item.quantidade > 0);
+
+        salvarCarrinho();
 
         lista.innerHTML = "";
         let valorTotal = 0;
@@ -110,11 +140,23 @@
         total.textContent = valorTotal.toFixed(2);
     }
 
-    function enviarWhatsApp(){
+
+    function abrirPagamento(){
         if(carrinho.length === 0){
             alert("Seu carrinho está vazio!");
             return;
         }
+        // abre nova página para escolher Pix/Débito/Crédito
+        window.location.href = 'pagamento.html';
+    }
+
+    function enviarWhatsApp(){
+        // mantido caso você queira voltar a usar o fluxo via WhatsApp
+        if(carrinho.length === 0){
+            alert("Seu carrinho está vazio!");
+            return;
+        }
+
 
         let mensagem = "Olá! Gostaria de fazer o seguinte pedido:%0A%0A";
         let total = 0;

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formas de Pagamento - Pão de Queijo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Pão de Queijo Mineiro</h1>
+
+    <nav>
+        <a href="proxima.html">Voltar</a>
+        <a href="#contato">Contato</a>
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>Selecione a forma de pagamento</h2>
+    <p>Escolha uma opção: Pix, Débito ou Crédito.</p>
+</section>
+
+<section id="pagamentos" style="padding:50px 20px; text-align:center; max-width:900px; margin:0 auto;">
+    <h2>Formas de pagamento</h2>
+
+    <div class="produtos-container" style="margin-top:20px;">
+        <div class="produto" style="width:280px;">
+            <h3>💳 Pix</h3>
+            <p>Pagamento via chave Pix.</p>
+            <button onclick="confirmar('pix')">Pagar com Pix</button>
+        </div>
+
+        <div class="produto" style="width:280px;">
+            <h3>🏦 Débito</h3>
+            <p>Pagamento no débito.</p>
+            <button onclick="confirmar('debito')">Pagar com Débito</button>
+        </div>
+
+        <div class="produto" style="width:280px;">
+            <h3>💳 Crédito</h3>
+            <p>Pagamento no crédito.</p>
+            <button onclick="confirmar('credito')">Pagar com Crédito</button>
+        </div>
+    </div>
+</section>
+
+<section id="contato">
+    <hr class="divisao" style="max-width:900px;">
+    <h2>Contato</h2>
+    <p>WhatsApp: (41) 99999-9999</p>
+    <p>Email: contato@paodequeijo.com</p>
+</section>
+
+<footer>
+    <p>© 2026 Pão de Queijo Mineiro</p>
+</footer>
+
+<script>
+    function confirmar(tipo){
+        // Mantém simples: abre uma mensagem de confirmação.
+        // Se quiser integrar com um checkout depois, é só substituir esta função.
+        alert(`Pagamento selecionado: ${tipo.toUpperCase()}`);
+        // Exemplo: poderia limpar o carrinho após confirmar.
+        // localStorage.removeItem('carrinho');
+    }
+</script>
+
+</body>
+</html>
+

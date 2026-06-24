@@ -170,6 +170,13 @@ nav a{
     border-radius:5px;
 }
 
+.estoque{
+    color:#166534;
+    font-size:1rem;
+    margin-bottom:10px;
+}
+
+
 .remover{
     background:red;
     color:white;

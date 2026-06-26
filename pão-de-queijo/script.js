@@ -6,6 +6,76 @@ const ESTOQUE_DEFAULT = {
     Salame: 30,
 };
 
+const USUARIOS_STORAGE_KEY = 'usuarios_pao_de_queijo';
+
+function carregarUsuarios(){
+    const raw = localStorage.getItem(USUARIOS_STORAGE_KEY);
+    if(!raw) return [];
+    try{
+        const usuarios = JSON.parse(raw);
+        return Array.isArray(usuarios) ? usuarios : [];
+    }catch(e){
+        return [];
+    }
+}
+
+function salvarUsuarios(usuarios){
+    localStorage.setItem(USUARIOS_STORAGE_KEY, JSON.stringify(usuarios));
+}
+
+function validarEmail(email){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function cadastrarUsuario(event){
+    event.preventDefault();
+
+    const nome = document.getElementById('nome-usuario')?.value.trim();
+    const email = document.getElementById('email-usuario')?.value.trim().toLowerCase();
+    const senha = document.getElementById('senha-usuario')?.value;
+    const telefone = document.getElementById('telefone-usuario')?.value.trim();
+    const endereco = document.getElementById('endereco-usuario')?.value.trim();
+    const mensagem = document.getElementById('mensagem-cadastro');
+
+    if(mensagem){
+        mensagem.textContent = '';
+        mensagem.classList.remove('sucesso');
+    }
+
+    if(!nome || !email || !senha || !telefone || !endereco){
+        if(mensagem) mensagem.textContent = 'Preencha todos os campos para cadastrar.';
+        return;
+    }
+
+    if(!validarEmail(email)){
+        if(mensagem) mensagem.textContent = 'Digite um email válido.';
+        return;
+    }
+
+    if(senha.length < 6){
+        if(mensagem) mensagem.textContent = 'A senha precisa ter pelo menos 6 caracteres.';
+        return;
+    }
+
+    const usuarios = carregarUsuarios();
+    const existente = usuarios.find(u => u.email === email);
+    if(existente){
+        if(mensagem) mensagem.textContent = 'Esse email já está cadastrado. Tente outro ou faça login.';
+        return;
+    }
+
+    usuarios.push({ nome, email, senha, telefone, endereco });
+    salvarUsuarios(usuarios);
+
+    if(mensagem){
+        mensagem.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
+        mensagem.classList.add('sucesso');
+    }
+
+    document.getElementById('form-cadastro')?.reset();
+    window.location.href = 'index.html';
+}
+
 // Lê do localStorage (gerenciado pela página estoque.html)
 function carregarEstoque(){
     const raw = localStorage.getItem('estoque');
@@ -152,4 +222,9 @@ function enviarWhatsApp(){
 document.addEventListener('DOMContentLoaded', () => {
     // em index.html não existe lista-carrinho, mas em proxima.html existe.
     atualizarCarrinho();
+
+    const formCadastro = document.getElementById('form-cadastro');
+    if(formCadastro){
+        formCadastro.addEventListener('submit', cadastrarUsuario);
+    }
 });

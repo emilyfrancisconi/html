@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Pão de Queijo Mineiro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Pão de Queijo Mineiro</h1>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="proxima.html">Carrinho</a>
+        <a href="estoque.html">Estoque</a>
+    </nav>
+</header>
+
+<section class="cadastro">
+    <h2>Cadastre-se</h2>
+    <p>Crie seu cadastro para pedir mais rápido e acompanhar seu histórico.</p>
+
+    <form id="form-cadastro">
+        <label for="nome-usuario">Nome</label>
+        <input id="nome-usuario" type="text" placeholder="Seu nome" required>
+
+        <label for="email-usuario">Email</label>
+        <input id="email-usuario" type="email" placeholder="seu@email.com" required>
+
+        <label for="senha-usuario">Senha</label>
+        <input id="senha-usuario" type="password" placeholder="Senha (mínimo 6 caracteres)" minlength="6" required>
+
+        <label for="telefone-usuario">Telefone</label>
+        <input id="telefone-usuario" type="tel" placeholder="(41) 99999-9999" required>
+
+        <label for="endereco-usuario">Endereço</label>
+        <input id="endereco-usuario" type="text" placeholder="Rua, número, bairro" required>
+
+        <button type="submit">Cadastrar</button>
+        <p id="mensagem-cadastro" class="mensagem"></p>
+    </form>
+</section>
+
+<footer>
+    <p>© 2026 Pão de Queijo Mineiro</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -14,9 +14,10 @@
 
     <nav>
         <a href="#produtos">Produtos</a>
-        <a href="cadastro.html">Cadastro</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#contato">Contato</a>
+
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+
     </nav>
 </header>
 
@@ -29,10 +30,9 @@
         carrinho
     </a>
 
-    <a class="botao-proxima" href="estoque.html">
-        estoque
-    </a>
+
 </section>
+
 
 <section id="produtos">
 
@@ -45,9 +45,8 @@
             <h3>Pão de Queijo Tradicional</h3>
             <p>Pacote com 10 unidades</p>
             <span>R$ 20,00</span>
-            <p class="estoque">Estoque: <span id="estoque-Tradicional">20</span></p>
-            
-            <button onclick="adicionarCarrinho('Pão de Queijo Tradicional',20,obterEstoquePorNome('Pão de Queijo Tradicional'))">
+            <button onclick="adicionarCarrinho('Pão de Queijo Tradicional',20)"> 
+
 
                 Adicionar ao Carrinho
             </button>
@@ -56,12 +55,11 @@
 
         <div class="produto">
             <img src="imagens/172382837066bf889213154_1723828370_3x2_md.jpg"
-            <h3>Pão de Queijo com Recheado doce</h3>
+            <h3>Pão de Queijo com Recheado doce de leite</h3>
             <p>Pacote com 15 unidades </p>
             <span>R$ 35,00</span>
-            <p class="estoque">Estoque: <span id="estoque-Doce">30</span></p>
+            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado doce de leite',35)"> 
 
-            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado doce',35,obterEstoquePorNome('Pão de Queijo com Recheado doce'))">
 
                 Adicionar ao Carrinho
             </button>
@@ -73,14 +71,48 @@
             <h3>Pão de Queijo com recheio de salame
             <p>Pacote com 10 nidades</p>
             <span>R$ 37,00</span>
-            <p class="estoque">Estoque: <span id="estoque-Salame">30</span></p>
+            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado de salame',37)"> 
 
-            
-            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado de salame',37,obterEstoquePorNome('Pão de Queijo com Recheado de salame'))">
 
                 Adicionar ao Carrinho
             </button>
 
+        </div>
+
+        <div class="produto">
+            <img src="imagens/pao-de-queijo-com-bacon-blog.png"
+            <h3>Pão de Queijo com Recheado de becon</h3>
+            <p>Pacote com 10 unidades </p>
+            <span>R$ 30,00</span>
+            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado de becon',30)"> 
+
+
+                Adicionar ao Carrinho
+            </button>
+        </div>
+
+        <div class="produto">
+            <img src="imagens/pao-de-queijo-com-goiabada.jpeg"
+            <h3>Pão de Queijo com Recheado de goiabada</h3>
+            <p>Pacote com 10 unidades </p>
+            <span>R$ 32,00</span>
+            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado de goiabada',32)"> 
+
+
+                Adicionar ao Carrinho
+            </button>
+        </div>
+
+        <div class="produto">
+            <img src="imagens/SITE4-1024x1024.jpg"
+            <h3>Pão de Queijo com Recheado de morango</h3>
+            <p>Pacote com 12 unidades </p>
+            <span>R$ 34,00</span>
+            <button onclick="adicionarCarrinho('Pão de Queijo com Recheado de morango',34)"> 
+
+
+                Adicionar ao Carrinho
+            </button>
         </div>
 
 
@@ -91,24 +123,8 @@
 
 
 
-<section id="sobre">
-    <h2>Sobre Nós</h2>
-
-    <p>
-        Produzimos pão de queijo artesanal seguindo receitas
-        tradicionais mineiras há mais de 10 anos.
-    </p>
-</section>
-
 <hr class="divisao">
 
-<section id="contato">
-    <h2>Contato</h2>
-
-
-    <p>WhatsApp: (41) 99999-9999</p>
-    <p>Email: contato@paodequeijo.com</p>
-</section>
 
 <footer>
     <p>
@@ -118,36 +134,6 @@
 
 <script src="script.js"></script>
 
-<script>
-    // Atualiza estoques na página e provê função para usar no inline onclick
-    document.addEventListener('DOMContentLoaded', () => {
-        if (typeof carregarEstoque === 'function') {
-            const estoque = carregarEstoque();
-            const ids = {
-                Tradicional: 'estoque-Tradicional',
-                Doce: 'estoque-Doce',
-                Salame: 'estoque-Salame'
-            };
-            Object.entries(ids).forEach(([k, id]) => {
-                const el = document.getElementById(id);
-                if (el) el.textContent = estoque[k] ?? 0;
-            });
-        }
-    });
-
-    function obterEstoquePorNome(nome){
-        // nomes precisam bater com o MAP do estoque (estoque.html)
-        const map = {
-            'Pão de Queijo Tradicional': 'Tradicional',
-            'Pão de Queijo com Recheado doce': 'Doce',
-            'Pão de Queijo com Recheado de salame': 'Salame',
-        };
-        const chave = map[nome];
-        if(!chave || typeof carregarEstoque !== 'function') return 0;
-        const estoque = carregarEstoque();
-        return estoque[chave] ?? 0;
-    }
-</script>
 
 </body>
 </html>

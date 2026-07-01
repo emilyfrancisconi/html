@@ -6,7 +6,7 @@
 }
 
 body{
-    background:#FFF8E7;
+    background:#fff8ee;
 }
 
 header{
@@ -51,18 +51,6 @@ header nav{
 
 header h1{
     margin-right:0;
-}
-
-.header-carrinho,
-.header-estoque{
-    justify-content:space-between;
-    text-align:left;
-}
-
-.header-carrinho nav,
-.header-estoque nav{
-    justify-content:flex-end;
-    margin-left:auto;
 }
 
 
@@ -179,65 +167,6 @@ nav a{
     cursor:pointer;
 }
 
-.cadastro{
-    padding:50px 20px;
-    text-align:center;
-    background:#fff4e6;
-    max-width:700px;
-    margin:0 auto 40px auto;
-    border-radius:15px;
-    box-shadow:0 0 20px rgba(0,0,0,0.08);
-}
-
-.cadastro h2{
-    margin-bottom:15px;
-}
-
-.cadastro p{
-    margin-bottom:25px;
-    color:#6b7280;
-}
-
-.cadastro form{
-    display:grid;
-    gap:15px;
-    text-align:left;
-}
-
-.cadastro label{
-    font-weight:700;
-    margin-bottom:5px;
-    display:block;
-}
-
-.cadastro input{
-    width:100%;
-    padding:12px 14px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    font-size:1rem;
-}
-
-.cadastro button{
-    background:#d97706;
-    color:white;
-    border:none;
-    padding:12px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:700;
-}
-
-.mensagem{
-    font-size:0.95rem;
-    color:#b91c1c;
-    min-height:1.2rem;
-}
-
-.mensagem.sucesso{
-    color:#166534;
-}
-
 #carrinho{
     width:90%;
     max-width:700px;
@@ -246,11 +175,6 @@ nav a{
     padding:20px;
     border-radius:10px;
     box-shadow:0 0 10px rgba(0,0,0,.1);
-}
-
-#carrinho h2{
-    text-align:center;
-    margin-bottom:20px;
 }
 
 #lista-carrinho{
@@ -266,12 +190,6 @@ nav a{
     padding:10px;
     margin-bottom:10px;
     border-radius:5px;
-}
-
-.estoque{
-    color:#166534;
-    font-size:1rem;
-    margin-bottom:10px;
 }
 
 

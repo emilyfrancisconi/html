@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pix - Pão de Queijo</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #pix-container { padding: 50px 20px; text-align: center; max-width: 900px; margin: 0 auto; }
+        #pix-qr { width: 270px; height: 270px; margin: 20px auto; }
+        textarea#pix-copia-e-cola { width: min(800px, 100%); height: 110px; padding: 12px; border-radius: 10px; border: 1px solid #e5e7eb; font-family: monospace; }
+        .box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,.08); }
+        .hidden { display:none; }
+        .btn { background:#16a34a; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Pão de Queijo Mineiro</h1>
+    <nav>
+        <a href="proxima.html">Voltar</a>
+        <a href="#contato">Contato</a>
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>Pagamento via Pix</h2>
+    <p>Escaneie o QR Code ou copie e cole o código.</p>
+</section>
+
+<section id="pix-container">
+    <div class="box">
+        <h3>Total a pagar</h3>
+        <p style="font-size:1.6rem; color: #166534; font-weight:bold;" id="pix-valor">R$ 0,00</p>
+
+        <div id="pix-qr-wrap">
+            <div id="pix-qr-holder">
+                <img src="imagens/escaneie-me-o-codigo-qr_78370-9714.avif" alt="QR Code Pix" width="256" height="256" style="width:256px; height:256px;" src="imagens/qr-code.png" />
+
+            </div>
+        </div>
+
+        
+
+        <button class="btn" onclick="copyPix()">Copiar código Pix</button>
+
+        <div style="margin-top:16px;">
+            <label style="display:block; margin-bottom:8px; font-weight:bold;">Copia e cola</label>
+            <textarea id="pix-copia-e-cola" readonly></textarea>
+        </div>
+
+        <p style="margin-top:12px; color:#6b7280;">Se não aparecer o QR Code, copie o código Pix acima.</p>
+    </div>
+</section>
+
+
+
+<footer>
+    <p>© 2026 Pão de Queijo Mineiro</p>
+</footer>
+
+<script src="pix.js"></script>
+    <script>
+    // se você definir uma chave Pix real no pix.js, o payload será gerado corretamente.
+    // Para o QR aparecer, é necessário um gerador de QRCode (biblioteca externa).
+    // Este projeto tenta renderizar QR se a biblioteca estiver disponível; caso contrário, o payload fica pronto para copiar.
+
+    function copyPix(){
+
+
+        const el = document.getElementById('pix-copia-e-cola');
+        if(!el) return;
+        el.select();
+        document.execCommand('copy');
+        alert('Código Pix copiado!');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!window.PixApp) {
+            alert('Pix indisponível.');
+            return;
+        }
+        // Renderiza payload e (se possível) QR.
+        window.PixApp.montarUI({
+            onErro: () => {
+                // QR falhou (sem biblioteca externa) -> deixa payload visível
+            }
+        });
+    });
+</script>
+</body>
+</html>
+

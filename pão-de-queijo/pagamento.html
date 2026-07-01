@@ -28,9 +28,11 @@
     <div class="produtos-container" style="margin-top:20px;">
         <div class="produto" style="width:280px;">
             <h3>💳 Pix</h3>
-            <p>Pagamento via chave Pix.</p>
-            <button onclick="confirmar('pix')">Pagar com Pix</button>
+            <p>Gere o QR Code e copie-e-cole.</p>
+            <button onclick="escolherPix()">Pagar com Pix</button>
         </div>
+
+
 
         <div class="produto" style="width:280px;">
             <h3>🏦 Débito</h3>
@@ -59,13 +61,20 @@
 
 <script>
     function confirmar(tipo){
+        if(tipo === 'pix'){
+            escolherPix();
+            return;
+        }
         // Mantém simples: abre uma mensagem de confirmação.
-        // Se quiser integrar com um checkout depois, é só substituir esta função.
         alert(`Pagamento selecionado: ${tipo.toUpperCase()}`);
-        // Exemplo: poderia limpar o carrinho após confirmar.
-        // localStorage.removeItem('carrinho');
+    }
+
+    function escolherPix(){
+        // Vai para a página que monta o Pix e o QR Code.
+        window.location.href = 'pagamento-qr.html';
     }
 </script>
+
 
 </body>
 </html>

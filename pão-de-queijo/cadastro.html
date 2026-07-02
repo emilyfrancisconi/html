@@ -31,7 +31,7 @@
             Preencha os campos abaixo.
         </p>
 
-        <form style="margin-top:18px;" onsubmit="return false;">
+        <form id="formCadastro" style="margin-top:18px;">
             <div style="display:flex; flex-direction:column; gap:12px; text-align:left;">
                 <label>
                     Nome
@@ -49,7 +49,27 @@
                     Telefone
                     <input required type="tel" name="telefone" autocomplete="tel" placeholder="(DDD) 99999-9999"
                         style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
-                </label>
+                </label>>
+
+                <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                    <label style="flex:2; min-width:240px;">
+                        Bairro
+                        <input required type="text" name="bairro" autocomplete="sublocality" placeholder="Bairro"
+                            style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                    </label>
+
+                    <label style="flex:2; min-width:240px;">
+                        Rua
+                        <input required type="text" name="rua" autocomplete="street-address" placeholder="Rua/Av. ..."
+                            style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                    </label>
+
+                    <label style="flex:1; min-width:120px;">
+                        Número
+                        <input required type="text" name="numero" autocomplete="address-line2" placeholder="Nº"
+                            style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                    </label>
+                </div>
 
                 <label>
                     Senha
@@ -62,7 +82,9 @@
                     <input required type="password" name="confirmarSenha" autocomplete="new-password"
                         style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" minlength="6" />
                 </label>
+
             </div>
+
 
             <div style="display:flex; gap:12px; margin-top:18px; justify-content:center; flex-wrap:wrap;">
                 <button class="botao-proxima" type="submit" style="border:none;">

@@ -266,7 +266,7 @@ nav a{
     content:"";
     position:absolute;
     inset:0;
-    /* Fundo com imagem na "banner" (subtítulo da página inicial) */
+    /* Fundo com imagem no "banner" (subtítulo da página inicial) */
     background-image:url("imagens/teste-padrão-do-queijo-fundo-sem-emenda-com-queijo-diferente-tirado-mão-71455274.webp"); 
     background-size:cover;
     background-position:center;

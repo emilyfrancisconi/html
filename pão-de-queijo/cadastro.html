@@ -12,41 +12,76 @@
     <h1>Pão de Queijo Mineiro</h1>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="proxima.html">Carrinho</a>
-        <a href="estoque.html">Estoque</a>
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <a href="cadastro.html">Cadastro</a>
     </nav>
 </header>
 
-<section class="cadastro">
-    <h2>Cadastre-se</h2>
-    <p>Crie seu cadastro para pedir mais rápido e acompanhar seu histórico.</p>
+<section class="banner">
+    <h2>Cadastro</h2>
+    <p>Crie sua conta para agilizar seus pedidos.</p>
+</section>
 
-    <form id="form-cadastro">
-        <label for="nome-usuario">Nome</label>
-        <input id="nome-usuario" type="text" placeholder="Seu nome" required>
+<section id="cadastro" style="padding:50px 20px; text-align:center; max-width:900px; margin:0 auto;">
+    <div class="produto" style="max-width:520px; margin:0 auto;">
+        <h3>Seus dados</h3>
+        <p style="margin-top:6px; color:#374151; line-height:1.6;">
+            Preencha os campos abaixo.
+        </p>
 
-        <label for="email-usuario">Email</label>
-        <input id="email-usuario" type="email" placeholder="seu@email.com" required>
+        <form style="margin-top:18px;" onsubmit="return false;">
+            <div style="display:flex; flex-direction:column; gap:12px; text-align:left;">
+                <label>
+                    Nome
+                    <input required type="text" name="nome" autocomplete="name"
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                </label>
 
-        <label for="senha-usuario">Senha</label>
-        <input id="senha-usuario" type="password" placeholder="Senha (mínimo 6 caracteres)" minlength="6" required>
+                <label>
+                    Email
+                    <input required type="email" name="email" autocomplete="email"
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                </label>
 
-        <label for="telefone-usuario">Telefone</label>
-        <input id="telefone-usuario" type="tel" placeholder="(41) 99999-9999" required>
+                <label>
+                    Telefone
+                    <input required type="tel" name="telefone" autocomplete="tel" placeholder="(DDD) 99999-9999"
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                </label>
 
-        <label for="endereco-usuario">Endereço</label>
-        <input id="endereco-usuario" type="text" placeholder="Rua, número, bairro" required>
+                <label>
+                    Senha
+                    <input required type="password" name="senha" autocomplete="new-password"
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" minlength="6" />
+                </label>
 
-        <button type="submit">Cadastrar</button>
-        <p id="mensagem-cadastro" class="mensagem"></p>
-    </form>
+                <label>
+                    Confirmar senha
+                    <input required type="password" name="confirmarSenha" autocomplete="new-password"
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" minlength="6" />
+                </label>
+            </div>
+
+            <div style="display:flex; gap:12px; margin-top:18px; justify-content:center; flex-wrap:wrap;">
+                <button class="botao-proxima" type="submit" style="border:none;">
+                    Cadastrar
+                </button>
+
+                <a href="index.html" class="botao-proxima" style="background:#16a34a;">
+                    Voltar
+                </a>
+            </div>
+
+        </form>
+    </div>
 </section>
 
 <footer>
     <p>© 2026 Pão de Queijo Mineiro</p>
 </footer>
 
-<script src="script.js"></script>
 </body>
 </html>
+

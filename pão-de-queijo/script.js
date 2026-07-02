@@ -3,8 +3,11 @@ let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
 // Limites de estoque (removido localStorage “estoque”)
 const ESTOQUE_MAX_POR_NOME = {
     "Pão de Queijo Tradicional": 20,
-    "Pão de Queijo com Recheado doce": 30,
-    "Pão de Queijo com Recheado de salame": 30,
+    "Pão de Queijo com Recheado doce de leite": 35,
+    "Pão de Queijo com Recheado de salame": 37,
+    "Pão de Queijo com Recheado de becon": 30,
+    "Pão de Queijo com Recheado de goiabada": 32,
+    "Pão de Queijo com Recheado de morango": 34,
 };
 
 function salvarCarrinho(){
@@ -13,16 +16,27 @@ function salvarCarrinho(){
 
 
 function adicionarCarrinho(nome, preco){
-    const limite = Number(ESTOQUE_MAX_POR_NOME[nome] ?? 0);
+    // Padroniza nomes para casar com o estoque do proxima.html/pagamento.
+    const nomePadrao = nome
+        .replace('Recheado doce de leite', 'Recheado doce de leite')
+        .replace('Recheado de salame', 'Recheado de salame')
+        .replace('Recheado de becon', 'Recheado de becon')
+        .replace('Recheado de goiabada', 'Recheado de goiabada')
+        .replace('Recheado de morango', 'Recheado de morango')
+        .replace('Recheado doce de leite', 'Recheado doce de leite');
+
+    const limite = Number(ESTOQUE_MAX_POR_NOME[nomePadrao] ?? 0);
     if(limite <= 0){
         alert('Produto sem estoque cadastrado no momento.');
         return;
     }
 
 
-    const itemExistente = carrinho.find(item => item.nome === nome);
+    const itemExistente = carrinho.find(item => item.nome === nomePadrao);
 
     if(itemExistente){
+        // Mantém nome padronizado no carrinho
+        itemExistente.nome = nomePadrao;
         if(itemExistente.quantidade >= limite){
             alert(`Estoque insuficiente para ${nome}. Limite: ${limite}.`);
             return;
@@ -30,7 +44,7 @@ function adicionarCarrinho(nome, preco){
         itemExistente.quantidade++;
     }else{
         carrinho.push({
-            nome,
+            nome: nomePadrao,
             preco,
             quantidade: 1
         });

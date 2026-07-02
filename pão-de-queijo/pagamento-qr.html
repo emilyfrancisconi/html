@@ -62,32 +62,19 @@
 
 <script src="pix.js"></script>
     <script>
-    // se você definir uma chave Pix real no pix.js, o payload será gerado corretamente.
-    // Para o QR aparecer, é necessário um gerador de QRCode (biblioteca externa).
-    // Este projeto tenta renderizar QR se a biblioteca estiver disponível; caso contrário, o payload fica pronto para copiar.
-
+    // pix.js já popula #pix-valor e #pix-copia-e-cola.
     function copyPix(){
-
-
         const el = document.getElementById('pix-copia-e-cola');
         if(!el) return;
+        if(!el.value){
+            alert('Código Pix ainda não carregou.');
+            return;
+        }
+        el.focus();
         el.select();
         document.execCommand('copy');
         alert('Código Pix copiado!');
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        if (!window.PixApp) {
-            alert('Pix indisponível.');
-            return;
-        }
-        // Renderiza payload e (se possível) QR.
-        window.PixApp.montarUI({
-            onErro: () => {
-                // QR falhou (sem biblioteca externa) -> deixa payload visível
-            }
-        });
-    });
 </script>
 </body>
 </html>

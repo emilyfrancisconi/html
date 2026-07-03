@@ -5,5 +5,7 @@
 - [ ] (Conforme solicitado) Corrigir a inconsistência de nomes/estoque entre `index.html/script.js` e `proxima.html` para que o carrinho funcione sem “estoque sem cadastro”.
 - [ ] Testar o fluxo completo: Index -> adicionar produtos -> proxima -> finalizar -> pagamento -> Pix -> copiar.
 - [ ] (Novo) Incluir endereço no cadastro (CEP, logradouro, número, complemento, bairro, cidade, UF).
+- [x] Criar estoque (limites via `estoque/estoque.json`) e usar no carrinho.
+
 
 

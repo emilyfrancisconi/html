@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Funcionário - Pão de Queijo Mineiro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Pão de Queijo Mineiro</h1>
+
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <a href="cadastro.html">Cadastro</a>
+
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>Cadastro de Funcionário</h2>
+    <p>Use este cadastro para registrar os dados do funcionário.</p>
+</section>
+
+<section id="cadastro-funcionario" style="padding:50px 20px; text-align:center; max-width:900px; margin:0 auto;">
+    <div class="produto" style="max-width:560px; margin:0 auto;">
+        <h3>Dados do funcionário</h3>
+        <p style="margin-top:6px; color:#374151; line-height:1.6;">
+            Preencha os campos abaixo.
+        </p>
+
+        <form id="formFuncionario" style="margin-top:18px;">
+            <div style="display:flex; flex-direction:column; gap:12px; text-align:left;">
+                <label>
+                    Nome
+                    <input required type="text" name="nome" autocomplete="name"
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                </label>
+
+                <label>
+                    CPF
+                    <input required type="text" name="cpf" autocomplete="off" placeholder="Somente números"
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                </label>
+
+                <label>
+                    Telefone
+                    <input required type="tel" name="telefone" autocomplete="tel" placeholder="(DDD) 99999-9999"
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                </label>
+
+                <label>
+                    Email
+                    <input required type="email" name="email" autocomplete="email"
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                </label>
+
+                <label>
+                    Cargo
+                    <input required type="text" name="cargo" autocomplete="organization-title" placeholder="Ex: Atendente, Cozinheiro..."
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                </label>
+
+                <label>
+                    Matrícula (opcional)
+                    <input type="text" name="matricula" autocomplete="off"
+                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                </label>
+            </div>
+
+            <div style="display:flex; gap:12px; margin-top:18px; justify-content:center; flex-wrap:wrap;">
+                <button class="botao-proxima" type="submit" style="border:none;">
+                    Cadastrar
+                </button>
+
+                <a href="index.html" class="botao-proxima" style="background:#16a34a;">
+                    Voltar
+                </a>
+            </div>
+
+            <p id="mensagemFuncionario" style="margin-top:14px; color:#374151; font-size:14px;"></p>
+        </form>
+    </div>
+
+    <div style="margin-top:30px; text-align:left; max-width:560px; margin-left:auto; margin-right:auto;">
+        <h3 style="margin-bottom:10px;">Funcionários cadastrados</h3>
+        <ul id="listaFuncionarios" style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;"></ul>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Pão de Queijo Mineiro</p>
+</footer>
+
+<script>
+    const CHAVE = 'funcionarios';
+
+    function carregarFuncionarios() {
+        try {
+            return JSON.parse(localStorage.getItem(CHAVE) || '[]');
+        } catch {
+            return [];
+        }
+    }
+
+    function salvarFuncionarios(lista) {
+        localStorage.setItem(CHAVE, JSON.stringify(lista));
+    }
+
+    function listarFuncionarios() {
+        const ul = document.getElementById('listaFuncionarios');
+        if (!ul) return;
+
+        const funcionarios = carregarFuncionarios();
+        ul.innerHTML = '';
+
+        if (funcionarios.length === 0) {
+            const li = document.createElement('li');
+            li.textContent = 'Nenhum funcionário cadastrado ainda.';
+            li.style.color = '#6b7280';
+            return ul.appendChild(li);
+        }
+
+        funcionarios.forEach((f) => {
+            const li = document.createElement('li');
+            li.style.border = '1px solid #e5e7eb';
+            li.style.borderRadius = '10px';
+            li.style.padding = '12px';
+            li.style.background = '#fff';
+
+            li.innerHTML = `
+                <div style="font-weight:600;">${f.nome}</div>
+                <div style="color:#374151; margin-top:4px; font-size:14px; line-height:1.6;">
+                    <div><b>Cargo:</b> ${f.cargo}</div>
+                    <div><b>CPF:</b> ${f.cpf}</div>
+                    <div><b>Telefone:</b> ${f.telefone}</div>
+                    <div><b>Email:</b> ${f.email}</div>
+                    ${f.matricula ? `<div><b>Matrícula:</b> ${f.matricula}</div>` : ''}
+                </div>
+            `;
+
+            ul.appendChild(li);
+        });
+    }
+
+    document.getElementById('formFuncionario').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const dados = new FormData(form);
+
+        const nome = String(dados.get('nome') || '').trim();
+        const cpf = String(dados.get('cpf') || '').trim();
+        const telefone = String(dados.get('telefone') || '').trim();
+        const email = String(dados.get('email') || '').trim();
+        const cargo = String(dados.get('cargo') || '').trim();
+        const matricula = String(dados.get('matricula') || '').trim();
+
+        const mensagem = document.getElementById('mensagemFuncionario');
+
+        if (!nome || !cpf || !telefone || !email || !cargo) {
+            mensagem.textContent = 'Preencha todos os campos obrigatórios.';
+            mensagem.style.color = '#b91c1c';
+            return;
+        }
+
+        const lista = carregarFuncionarios();
+        const cpfUnico = cpf.replace(/\D/g, '');
+
+        if (lista.some((f) => String(f.cpf).replace(/\D/g, '') === cpfUnico)) {
+            mensagem.textContent = 'Já existe um funcionário cadastrado com esse CPF.';
+            mensagem.style.color = '#b91c1c';
+            return;
+        }
+
+        lista.push({
+            nome,
+            cpf: cpfUnico,
+            telefone,
+            email,
+            cargo,
+            matricula: matricula || ''
+        });
+
+        salvarFuncionarios(lista);
+        form.reset();
+
+        mensagem.textContent = 'Funcionário cadastrado com sucesso!';
+        mensagem.style.color = '#16a34a';
+
+        listarFuncionarios();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        listarFuncionarios();
+    });
+</script>
+
+</body>
+</html>
+

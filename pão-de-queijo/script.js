@@ -1,14 +1,22 @@
 let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
 
-// Limites de estoque (removido localStorage “estoque”)
-const ESTOQUE_MAX_POR_NOME = {
-    "Pão de Queijo Tradicional": 20,
-    "Pão de Queijo com Recheado doce de leite": 35,
-    "Pão de Queijo com Recheado de salame": 37,
-    "Pão de Queijo com Recheado de becon": 30,
-    "Pão de Queijo com Recheado de goiabada": 32,
-    "Pão de Queijo com Recheado de morango": 34,
-};
+// Limites de estoque vindo de `estoque/estoque.json`
+let ESTOQUE_MAX_POR_NOME = {};
+let estoqueCarregado = false;
+
+async function carregarEstoque() {
+    try {
+        const resp = await fetch('estoque/estoque.json', { cache: 'no-store' });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        ESTOQUE_MAX_POR_NOME = await resp.json();
+        estoqueCarregado = true;
+    } catch (e) {
+        console.error('Falha ao carregar estoque:', e);
+        ESTOQUE_MAX_POR_NOME = {};
+        estoqueCarregado = false;
+    }
+}
+
 
 function salvarCarrinho(){
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
@@ -16,6 +24,12 @@ function salvarCarrinho(){
 
 
 function adicionarCarrinho(nome, preco){
+    // garante que estoque.json tenha sido carregado (evita bloquear enquanto o fetch ainda roda)
+    if(!estoqueCarregado){
+        alert('Carregando estoque... tente novamente em instantes.');
+        return;
+    }
+
     // Padroniza nomes para casar com o estoque do proxima.html/pagamento.
     const nomePadrao = nome
         .replace('Recheado doce de leite', 'Recheado doce de leite')
@@ -27,9 +41,11 @@ function adicionarCarrinho(nome, preco){
 
     const limite = Number(ESTOQUE_MAX_POR_NOME[nomePadrao] ?? 0);
     if(limite <= 0){
+
         alert('Produto sem estoque cadastrado no momento.');
         return;
     }
+
 
 
     const itemExistente = carrinho.find(item => item.nome === nomePadrao);
@@ -78,6 +94,7 @@ function atualizarCarrinho(){
         if(limite > 0 && item.quantidade > limite){
             return { ...item, quantidade: limite };
         }
+
         return item;
     }).filter(item => item.quantidade > 0);
 
@@ -132,7 +149,58 @@ function enviarWhatsApp(){
     window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await carregarEstoque();
     // em index.html não existe lista-carrinho, mas em proxima.html existe.
     atualizarCarrinho();
+
+    document.addEventListener('DOMContentLoaded', async () => {
+    await carregarEstoque();
+    atualizarCarrinho();
+
+    const formCadastro = document.getElementById("formCadastro");
+
+    if (formCadastro) {
+        formCadastro.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const dados = new FormData(formCadastro);
+
+            const senha = dados.get("senha");
+            const confirmarSenha = dados.get("confirmarSenha");
+
+            if (senha !== confirmarSenha) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+            if (usuarios.some(usuario => usuario.email === dados.get("email"))) {
+                alert("Este e-mail já está cadastrado!");
+                return;
+            }
+
+            usuarios.push({
+                nome: dados.get("nome"),
+                email: dados.get("email"),
+                telefone: dados.get("telefone"),
+                bairro: dados.get("bairro"),
+                rua: dados.get("rua"),
+                numero: dados.get("numero"),
+                senha: senha
+            });
+
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+            alert("Cadastro realizado com sucesso!");
+            formCadastro.reset();
+        });
+    }
 });
+
+});
+
+
+
+

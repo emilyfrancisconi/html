@@ -1,4 +1,24 @@
+/**
+ * ==============================================
+ * script.js
+ * ==============================================
+ * Responsabilidades:
+ * - Gerenciar o carrinho no localStorage (add/remover/limpar/atualizar UI).
+ * - Carregar limites de estoque via estoque/estoque.json e impedir quantidades acima do limite.
+ * - Montar o pedido e enviar via WhatsApp (WhatsApp “wa.me”).
+ * - Em páginas de cadastro (ex: cadastro.html), criar usuário no localStorage com validação de senha/duplicidade de email.
+ *
+ * Dependências de DOM (existem apenas se a página tiver os elementos):
+ * - #lista-carrinho, #total (página do carrinho)
+ * - #formCadastro (página de cadastro de usuários)
+ *
+ * Armazenamento no navegador:
+ * - localStorage.carrinho: array de itens { nome, preco, quantidade }
+ * - localStorage.usuarios: array de usuários { nome, email, telefone, bairro, rua, numero, senha }
+ */
+
 let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+
 
 // Limites de estoque vindo de `estoque/estoque.json`
 let ESTOQUE_MAX_POR_NOME = {};

@@ -1,0 +1,42 @@
+/* Seção Contato */
+#contato{
+    padding:50px 20px;
+    text-align:center;
+    max-width:900px;
+    margin:0 auto;
+}
+
+/* Caixas */
+.contato__box{
+    max-width:520px;
+    margin:0 auto;
+}
+
+/* Textos */
+#contato h3{
+    margin:0;
+}
+
+.contato__strong{
+    margin-top:8px;
+    color:#374151;
+    font-weight:bold;
+}
+
+.contato__desc{
+    margin-top:10px;
+    color:#374151;
+    line-height:1.6;
+}
+
+.contato__link{
+    margin-top:18px;
+    background:#16a34a;
+    border:none;
+}
+
+.contato__spacer{
+    height:20px;
+}
+
+

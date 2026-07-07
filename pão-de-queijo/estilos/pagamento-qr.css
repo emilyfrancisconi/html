@@ -1,0 +1,43 @@
+/* Layout da página de pagamento via Pix */
+#pix-container{
+    padding: 50px 20px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#pix-qr{
+    width: 270px;
+    height: 270px;
+    margin: 20px auto;
+}
+
+textarea#pix-copia-e-cola{
+    width: min(800px, 100%);
+    height: 110px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    font-family: monospace;
+}
+
+.box{
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,.08);
+}
+
+.hidden{
+    display:none;
+}
+
+.btn{
+    background:#16a34a;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+

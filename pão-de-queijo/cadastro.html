@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - Pão de Queijo Mineiro</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="estilos/cadastro.css">
 </head>
+
 <body>
 
 <header>
@@ -26,77 +28,69 @@
     <p>Crie sua conta para agilizar seus pedidos.</p>
 </section>
 
-<section id="cadastro" style="padding:50px 20px; text-align:center; max-width:900px; margin:0 auto;">
-    <div class="produto" style="max-width:520px; margin:0 auto;">
+<section id="cadastro" class="cadastro">
+    <div class="produto cadastro__box">
         <h3>Seus dados</h3>
-        <p style="margin-top:6px; color:#374151; line-height:1.6;">
-            Preencha os campos abaixo.
-        </p>
+        <p class="cadastro__descricao">Preencha os campos abaixo.</p>
 
-        <form id="formCadastro" style="margin-top:18px;">
-            <div style="display:flex; flex-direction:column; gap:12px; text-align:left;">
-                <label>
+
+
+        <form id="formCadastro" class="cadastro__form">
+
+            <div class="cadastro__campos">
+                <label class="cadastro__campo">
                     Nome
-                    <input required type="text" name="nome" autocomplete="name"
-                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                    <input required type="text" name="nome" autocomplete="name" class="cadastro__input" />
                 </label>
 
-                <label>
+
+                <label class="cadastro__campo">
                     Email
-                    <input required type="email" name="email" autocomplete="email"
-                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                    <input required type="email" name="email" autocomplete="email" class="cadastro__input" />
                 </label>
 
-                <label>
+                <label class="cadastro__campo">
                     Telefone
-                    <input required type="tel" name="telefone" autocomplete="tel" placeholder="(DDD) 99999-9999"
-                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                    <input required type="tel" name="telefone" autocomplete="tel" placeholder="(DDD) 99999-9999" class="cadastro__input" />
                 </label>
 
-                <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                    <label style="flex:2; min-width:240px;">
+                <div class="cadastro__linha">
+                    <label class="cadastro__campo cadastro__campo--2">
                         Bairro
-                        <input required type="text" name="bairro" autocomplete="sublocality" placeholder="Bairro"
-                            style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                        <input required type="text" name="bairro" autocomplete="sublocality" placeholder="Bairro" class="cadastro__input" />
                     </label>
 
-                    <label style="flex:2; min-width:240px;">
+                    <label class="cadastro__campo cadastro__campo--2">
                         Rua
-                        <input required type="text" name="rua" autocomplete="street-address" placeholder="Rua/Av. ..."
-                            style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                        <input required type="text" name="rua" autocomplete="street-address" placeholder="Rua/Av. ..." class="cadastro__input" />
                     </label>
 
-                    <label style="flex:1; min-width:120px;">
+                    <label class="cadastro__campo cadastro__campo--1">
                         Número
-                        <input required type="text" name="numero" autocomplete="address-line2" placeholder="Nº"
-                            style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" />
+                        <input required type="text" name="numero" autocomplete="address-line2" placeholder="Nº" class="cadastro__input" />
                     </label>
                 </div>
 
-                <label>
+                <label class="cadastro__campo">
                     Senha
-                    <input required type="password" name="senha" autocomplete="new-password"
-                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" minlength="6" />
+                    <input required type="password" name="senha" autocomplete="new-password" class="cadastro__input" minlength="6" />
                 </label>
 
-                <label>
+                <label class="cadastro__campo">
                     Confirmar senha
-                    <input required type="password" name="confirmarSenha" autocomplete="new-password"
-                        style="width:100%; margin-top:6px; padding:12px; border-radius:8px; border:1px solid #e5e7eb; outline:none;" minlength="6" />
+                    <input required type="password" name="confirmarSenha" autocomplete="new-password" class="cadastro__input" minlength="6" />
                 </label>
 
+
             </div>
 
 
-            <div style="display:flex; gap:12px; margin-top:18px; justify-content:center; flex-wrap:wrap;">
-                <button class="botao-proxima" type="submit" style="border:none;">
-                    Cadastrar
-                </button>
+            <div class="cadastro__acoes">
+                <button class="botao-proxima" type="submit">Cadastrar</button>
 
-                <a href="index.html" class="botao-proxima" style="background:#16a34a;">
-                    Voltar
-                </a>
+                <a href="index.html" class="botao-proxima botao-proxima--verde">Voltar</a>
             </div>
+
 
         </form>
     </div>

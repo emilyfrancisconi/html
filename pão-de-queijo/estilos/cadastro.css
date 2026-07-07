@@ -1,3 +1,75 @@
 #cadastro{
-
+    padding:50px 20px;
+    text-align:center;
+    max-width:900px;
+    margin:0 auto;
 }
+
+/* Caixa do formulário */
+.cadastro__box{
+    max-width:520px;
+    margin:0 auto;
+}
+
+.cadastro__descricao{
+    margin-top:6px;
+    color:#374151;
+    line-height:1.6;
+}
+
+.cadastro__form{
+    margin-top:18px;
+}
+
+.cadastro__campos{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    text-align:left;
+}
+
+.cadastro__campo{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+}
+
+.cadastro__input{
+    width:100%;
+    margin-top:6px;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #e5e7eb;
+    outline:none;
+}
+
+.cadastro__linha{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.cadastro__campo--2{
+    flex:2;
+    min-width:240px;
+}
+
+.cadastro__campo--1{
+    flex:1;
+    min-width:120px;
+}
+
+.cadastro__acoes{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+/* Variação do botão “Voltar” */
+.botao-proxima--verde{
+    background:#16a34a;
+    border:none;
+}
+

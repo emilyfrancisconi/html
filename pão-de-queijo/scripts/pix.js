@@ -1,5 +1,21 @@
+/**
+ * ==============================================
+ * scripts/pix.js
+ * ==============================================
+ * Responsabilidades:
+ * - Gerar payload Pix “copia e cola” (linha digitável EMV/BR) sem bibliotecas externas.
+ * - Ler o carrinho do localStorage (chave: 'carrinho'), calcular total e preencher:
+ *   - #pix-valor
+ *   - #pix-copia-e-cola
+ *
+ * Observações:
+ * - Valores como KEY_PIX, MERCHANT_NAME e TXID estão fixos/parametrizados no próprio arquivo.
+ * - O CRC16 é calculado localmente para fechar o payload.
+ */
+
 /*
   pix.js - Pix “copia e cola” (sem bibliotecas externas)
+
   - Lê o carrinho do localStorage (chave: carrinho)
   - Atualiza #pix-valor
   - Preenche #pix-copia-e-cola com um payload Pix simples

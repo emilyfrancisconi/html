@@ -1,6 +1,23 @@
-// ===== Cadastro de Funcionários (Centralizado no script.js) =====
+/**
+ * ==============================================
+ * scripts/cadastro_funcionarios.js
+ * ==============================================
+ * Responsabilidades:
+ * - Implementa o cadastro e listagem de funcionários.
+ * - Persistência em localStorage (chave: 'funcionarios').
+ * - Validação: campos obrigatórios + CPF único (após remover não-dígitos).
+ * - Renderiza a lista de funcionários na página.
+ *
+ * Dependências de DOM (existem apenas se a página tiver os elementos):
+ * - #formFuncionario (form de cadastro)
+ * - #listaFuncionarios (container <ul>)
+ * - #mensagemFuncionario (mensagem de status)
+ */
+
+// ===== Cadastro de Funcionários =====
 
     const formFuncionario = document.getElementById('formFuncionario');
+
     const listaFuncionarios = document.getElementById('listaFuncionarios');
     const mensagemFuncionario = document.getElementById('mensagemFuncionario');
 

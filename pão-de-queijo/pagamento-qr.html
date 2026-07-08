@@ -41,6 +41,7 @@
 
         <button class="btn" onclick="copyPix()">Copiar código Pix</button>
 
+
         <div class="pix__copybox">
 
             <label class="pix__label">Copia e cola</label>
@@ -60,21 +61,8 @@
 </footer>
 
 <script src="./scripts/pix.js"></script>
-    <script>
-    // pix.js já popula #pix-valor e #pix-copia-e-cola.
-    function copyPix(){
-        const el = document.getElementById('pix-copia-e-cola');
-        if(!el) return;
-        if(!el.value){
-            alert('Código Pix ainda não carregou.');
-            return;
-        }
-        el.focus();
-        el.select();
-        document.execCommand('copy');
-        alert('Código Pix copiado!');
-    }
-</script>
+<script src="./scripts/pagamento-qr.js"></script>
 </body>
 </html>
+
 
